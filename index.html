@@ -11,56 +11,57 @@
             color: #ffffff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
         .header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .header h1 {
             color: #d946ef;
-            font-size: 28px;
+            font-size: 26px;
             margin: 0;
         }
         .header p {
             color: #94a3b8;
-            font-size: 13px;
+            font-size: 12px;
         }
         .card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
-            padding: 20px;
+            padding: 15px;
             width: 100%;
-            max-width: 350px;
+            max-width: 380px;
             box-sizing: border-box;
             backdrop-filter: blur(10px);
         }
         .section-title {
-            font-size: 12px;
+            font-size: 11px;
             color: #a855f7;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            margin-top: 10px;
             text-transform: uppercase;
         }
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 8px;
         }
         .btn-option {
             background: #18152e;
             border: 1px solid #332d56;
             color: #fff;
-            padding: 12px;
+            padding: 10px;
             border-radius: 10px;
             cursor: pointer;
             text-align: center;
             font-weight: 600;
+            font-size: 13px;
             transition: 0.2s;
             user-select: none;
         }
@@ -74,21 +75,21 @@
             background: linear-gradient(90deg, #a855f7, #d946ef);
             border: none;
             color: white;
-            padding: 15px;
+            padding: 14px;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(217, 70, 239, 0.3);
-            margin-top: 10px;
+            margin-top: 15px;
         }
         .btn-main:active {
             transform: scale(0.98);
         }
         #status {
-            margin-top: 15px;
+            margin-top: 12px;
             text-align: center;
-            font-size: 13px;
+            font-size: 12px;
             color: #38bdf8;
             font-weight: bold;
         }
@@ -102,19 +103,23 @@
     </div>
 
     <div class="card">
-        <div class="section-title">ΕΠΙΛΟΓΗ ΖΕΥΓΑΡΙΟΥ</div>
+        <div class="section-title">ΕΠΙΛΟΓΗ OTC ΖΕΥΓΑΡΙΟΥ</div>
         <div class="grid" id="pair-grid">
             <div class="btn-option active" onclick="selectPair(this, 'EUR/USD OTC')">EUR/USD OTC</div>
             <div class="btn-option" onclick="selectPair(this, 'GBP/USD OTC')">GBP/USD OTC</div>
             <div class="btn-option" onclick="selectPair(this, 'USD/JPY OTC')">USD/JPY OTC</div>
-            <div class="btn-option" onclick="selectPair(this, 'BTC/USD')">BTC/USD</div>
+            <div class="btn-option" onclick="selectPair(this, 'AUD/CAD OTC')">AUD/CAD OTC</div>
+            <div class="btn-option" onclick="selectPair(this, 'EUR/GBP OTC')">EUR/GBP OTC</div>
+            <div class="btn-option" onclick="selectPair(this, 'USD/CHF OTC')">USD/CHF OTC</div>
+            <div class="btn-option" onclick="selectPair(this, 'NZD/USD OTC')">NZD/USD OTC</div>
+            <div class="btn-option" onclick="selectPair(this, 'BTC/USD OTC')">BTC/USD OTC</div>
         </div>
 
         <div class="section-title">ΧΡΟΝΟΣ ΛΗΞΗΣ (EXPIRATION)</div>
         <div class="grid" id="time-grid">
-            <div class="btn-option active" onclick="selectTime(this, '3s')">3 δευτ.</div>
-            <div class="btn-option" onclick="selectTime(this, '5s')">5 δευτ.</div>
-            <div class="btn-option" onclick="selectTime(this, '10s')">10 δευτ.</div>
+            <div class="btn-option active" onclick="selectTime(this, '5s')">5 δευτ.</div>
+            <div class="btn-option" onclick="selectTime(this, '15s')">15 δευτ.</div>
+            <div class="btn-option" onclick="selectTime(this, '30s')">30 δευτ.</div>
             <div class="btn-option" onclick="selectTime(this, '1m')">1 λεπτό</div>
         </div>
 
@@ -123,50 +128,12 @@
     </div>
 
     <script>
-        // Αρχικοποίηση Telegram WebApp
         const tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
 
         let selectedPair = "EUR/USD OTC";
-        let selectedTime = "3s";
+        let selectedTime = "5s";
 
         function selectPair(element, pair) {
-            const buttons = document.querySelectorAll('#pair-grid .btn-option');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
-            selectedPair = pair;
-        }
-
-        function selectTime(element, time) {
-            const buttons = document.querySelectorAll('#time-grid .btn-option');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
-            selectedTime = time;
-        }
-
-        function requestSignal() {
-            const statusDiv = document.getElementById('status');
-            statusDiv.innerText = "⏳ Αποστολή αιτήματος στο bot...";
-
-            const data = {
-                pair: selectedPair,
-                time: selectedTime
-            };
-
-            try {
-                // Στέλνει τα δεδομένα πίσω στο Telegram Bot σου
-                if (tg && tg.sendData) {
-                    tg.sendData(JSON.stringify(data));
-                    statusDiv.innerText = "✅ Το σήμα στάλθηκε! Ελέγξτε το chat.";
-                } else {
-                    // Αν τρέχει εκτός Telegram (π.χ. σε απλό browser για δοκιμή)
-                    statusDiv.innerText = `⚠️ (Test Mode) Επιλέξατε: ${selectedPair} - ${selectedTime}`;
-                }
-            } catch (e) {
-                statusDiv.innerText = "⚠️ Σφάλμα αποστολής δεδομένων.";
-            }
-        }
-    </script>
-</body>
-</html>
+            document.querySelectorAll('#pair-grid .btn-option').forEach(btn => btn.classList.remove('
