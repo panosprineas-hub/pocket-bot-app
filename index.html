@@ -84,15 +84,6 @@
         .btn-main:active {
             transform: scale(0.98);
         }
-        #signal-box {
-            margin-top: 20px;
-            display: none;
-            text-align: center;
-            padding: 15px;
-            border-radius: 12px;
-            background: #1e1b3a;
-            border: 1px solid #d946ef;
-        }
     </style>
 </head>
 <body>
@@ -103,15 +94,15 @@
     </div>
 
     <div class="card">
-        <div class="section-title">Επιλογη Ζευγαριου</div>
+        <div class="section-title">ΕΠΙΛΟΓΗ ΖΕΥΓΑΡΙΟΥ</div>
         <div class="grid">
             <div class="btn-option active" onclick="selectPair(this, 'EUR/USD OTC')">EUR/USD OTC</div>
             <div class="btn-option" onclick="selectPair(this, 'GBP/USD OTC')">GBP/USD OTC</div>
             <div class="btn-option" onclick="selectPair(this, 'USD/JPY OTC')">USD/JPY OTC</div>
-            <div class="btn-option" onclick="selectPair(this, 'CRYPTO')">BTC/USD</div>
+            <div class="btn-option" onclick="selectPair(this, 'BTC/USD')">BTC/USD</div>
         </div>
 
-        <div class="section-title">Χρονος Ληξης (Expiration)</div>
+        <div class="section-title">ΧΡΟΝΟΣ ΛΗΞΗΣ (EXPIRATION)</div>
         <div class="grid">
             <div class="btn-option active" onclick="selectTime(this, '3s')">3 δευτ.</div>
             <div class="btn-option" onclick="selectTime(this, '5s')">5 δευτ.</div>
@@ -120,10 +111,6 @@
         </div>
 
         <button class="btn-main" onclick="requestSignal()">🔥 ΛΗΨΗ ΣΗΜΑΤΟΣ 🔥</button>
-
-        <div id="signal-box">
-            <div id="signal-text" style="font-size: 18px; font-weight: bold;"></div>
-        </div>
     </div>
 
     <script>
@@ -144,13 +131,6 @@
 
         function requestSignal() {
             const tg = window.Telegram.WebApp;
+            
             const data = {
                 pair: selectedPair,
-                time: selectedTime
-            };
-            // Στέλνει τα επιλεγμένα δεδομένα στο Telegram Bot
-            tg.sendData(JSON.stringify(data));
-        }
-    </script>
-</body>
-</html>
