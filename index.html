@@ -121,80 +121,26 @@
     </div>
 
     <div class="card">
-        <div class="section-title">ΕΠΙΛΟΓΗ OTC ΖΕΥΓΑΡΙΟΥ</div>
+        <div class="section-title">ΕΠΙΛΟΓΗ CURRENCIES OTC</div>
         <select id="pair-select" class="select-pair" onchange="changePair(this)">
-            <optgroup label="Forex OTC">
-                <option value="EUR/USD OTC">EUR/USD OTC</option>
-                <option value="GBP/USD OTC">GBP/USD OTC</option>
-                <option value="USD/JPY OTC">USD/JPY OTC</option>
-                <option value="AUD/CAD OTC">AUD/CAD OTC</option>
-                <option value="EUR/GBP OTC">EUR/GBP OTC</option>
-                <option value="USD/CHF OTC">USD/CHF OTC</option>
-                <option value="NZD/USD OTC">NZD/USD OTC</option>
-                <option value="AUD/USD OTC">AUD/USD OTC</option>
-                <option value="EUR/JPY OTC">EUR/JPY OTC</option>
-                <option value="GBP/JPY OTC">GBP/JPY OTC</option>
-            </optgroup>
-            <optgroup label="Crypto & Commodities OTC">
-                <option value="BTC/USD OTC">BTC/USD OTC</option>
-                <option value="ETH/USD OTC">ETH/USD OTC</option>
-                <option value="LTC/USD OTC">LTC/USD OTC</option>
-                <option value="XRP/USD OTC">XRP/USD OTC</option>
-                <option value="Gold OTC">Gold OTC (Χρυσός)</option>
-                <option value="Silver OTC">Silver OTC (Ασημί)</option>
-            </optgroup>
-        </select>
-
-        <div class="section-title">ΧΡΟΝΟΣ ΛΗΞΗΣ (EXPIRATION)</div>
-        <div class="grid" id="time-grid">
-            <div class="btn-option active" onclick="selectTime(this, '5s')">5 δευτ.</div>
-            <div class="btn-option" onclick="selectTime(this, '15s')">15 δευτ.</div>
-            <div class="btn-option" onclick="selectTime(this, '30s')">30 δευτ.</div>
-            <div class="btn-option" onclick="selectTime(this, '1m')">1 λεπτό</div>
-        </div>
-
-        <button class="btn-main" onclick="requestSignal()">🔥 ΛΗΨΗ ΣΗΜΑΤΟΣ 🔥</button>
-        <div id="status"></div>
-    </div>
-
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand();
-
-        let selectedPair = "EUR/USD OTC";
-        let selectedTime = "5s";
-
-        function changePair(selectElement) {
-            selectedPair = selectElement.value;
-        }
-
-        function selectTime(element, time) {
-            document.querySelectorAll('#time-grid .btn-option').forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
-            selectedTime = time;
-        }
-
-        function requestSignal() {
-            const statusDiv = document.getElementById('status');
-            statusDiv.innerText = "⏳ Αποστολή αιτήματος στο bot...";
-
-            const data = {
-                pair: selectedPair,
-                time: selectedTime
-            };
-
-            try {
-                if (tg && tg.sendData) {
-                    tg.sendData(JSON.stringify(data));
-                    statusDiv.innerText = "✅ Το σήμα στάλθηκε! Ελέγξτε το chat.";
-                } else {
-                    statusDiv.innerText = `⚠️ (Test Mode) Επιλέξατε: ${selectedPair} - ${selectedTime}`;
-                }
-            } catch (e) {
-                statusDiv.innerText = "⚠️ Σφάλμα αποστολής δεδομένων.";
-            }
-        }
-    </script>
-</body>
-</html>
+            <option value="EUR/USD OTC">EUR/USD OTC</option>
+            <option value="GBP/USD OTC">GBP/USD OTC</option>
+            <option value="USD/JPY OTC">USD/JPY OTC</option>
+            <option value="AUD/USD OTC">AUD/USD OTC</option>
+            <option value="USD/CHF OTC">USD/CHF OTC</option>
+            <option value="NZD/USD OTC">NZD/USD OTC</option>
+            <option value="USD/CAD OTC">USD/CAD OTC</option>
+            <option value="EUR/GBP OTC">EUR/GBP OTC</option>
+            <option value="EUR/JPY OTC">EUR/JPY OTC</option>
+            <option value="GBP/JPY OTC">GBP/JPY OTC</option>
+            <option value="AUD/CAD OTC">AUD/CAD OTC</option>
+            <option value="AUD/JPY OTC">AUD/JPY OTC</option>
+            <option value="CAD/JPY OTC">CAD/JPY OTC</option>
+            <option value="CHF/JPY OTC">CHF/JPY OTC</option>
+            <option value="EUR/AUD OTC">EUR/AUD OTC</option>
+            <option value="EUR/CAD OTC">EUR/CAD OTC</option>
+            <option value="EUR/NZD OTC">EUR/NZD OTC</option>
+            <option value="GBP/AUD OTC">GBP/AUD OTC</option>
+            <option value="GBP/CAD OTC">GBP/CAD OTC</option>
+            <option value="GBP/CHF OTC">GBP/CHF OTC</option>
+            <option value="GBP/NZD OTC">GBP/NZD OTC</option>
