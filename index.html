@@ -33,7 +33,7 @@
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
-            padding: 15px;
+            padding: 20px;
             width: 100%;
             max-width: 380px;
             box-sizing: border-box;
@@ -43,9 +43,27 @@
             font-size: 11px;
             color: #a855f7;
             font-weight: bold;
-            margin-bottom: 6px;
-            margin-top: 10px;
+            margin-bottom: 8px;
+            margin-top: 15px;
             text-transform: uppercase;
+        }
+        /* Dropdown για όλα τα OTC Pairs */
+        .select-pair {
+            width: 100%;
+            background: #18152e;
+            border: 1px solid #332d56;
+            color: #fff;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            outline: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .select-pair:focus {
+            border-color: #d946ef;
+            box-shadow: 0 0 10px rgba(217, 70, 239, 0.4);
         }
         .grid {
             display: grid;
@@ -56,7 +74,7 @@
             background: #18152e;
             border: 1px solid #332d56;
             color: #fff;
-            padding: 10px;
+            padding: 12px;
             border-radius: 10px;
             cursor: pointer;
             text-align: center;
@@ -75,19 +93,20 @@
             background: linear-gradient(90deg, #a855f7, #d946ef);
             border: none;
             color: white;
-            padding: 14px;
+            padding: 15px;
             border-radius: 12px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(217, 70, 239, 0.3);
-            margin-top: 15px;
+            margin-top: 20px;
+            transition: 0.2s;
         }
         .btn-main:active {
             transform: scale(0.98);
         }
         #status {
-            margin-top: 12px;
+            margin-top: 15px;
             text-align: center;
             font-size: 12px;
             color: #38bdf8;
@@ -104,36 +123,15 @@
 
     <div class="card">
         <div class="section-title">ΕΠΙΛΟΓΗ OTC ΖΕΥΓΑΡΙΟΥ</div>
-        <div class="grid" id="pair-grid">
-            <div class="btn-option active" onclick="selectPair(this, 'EUR/USD OTC')">EUR/USD OTC</div>
-            <div class="btn-option" onclick="selectPair(this, 'GBP/USD OTC')">GBP/USD OTC</div>
-            <div class="btn-option" onclick="selectPair(this, 'USD/JPY OTC')">USD/JPY OTC</div>
-            <div class="btn-option" onclick="selectPair(this, 'AUD/CAD OTC')">AUD/CAD OTC</div>
-            <div class="btn-option" onclick="selectPair(this, 'EUR/GBP OTC')">EUR/GBP OTC</div>
-            <div class="btn-option" onclick="selectPair(this, 'USD/CHF OTC')">USD/CHF OTC</div>
-            <div class="btn-option" onclick="selectPair(this, 'NZD/USD OTC')">NZD/USD OTC</div>
-            <div class="btn-option" onclick="selectPair(this, 'BTC/USD OTC')">BTC/USD OTC</div>
-        </div>
-
-        <div class="section-title">ΧΡΟΝΟΣ ΛΗΞΗΣ (EXPIRATION)</div>
-        <div class="grid" id="time-grid">
-            <div class="btn-option active" onclick="selectTime(this, '5s')">5 δευτ.</div>
-            <div class="btn-option" onclick="selectTime(this, '15s')">15 δευτ.</div>
-            <div class="btn-option" onclick="selectTime(this, '30s')">30 δευτ.</div>
-            <div class="btn-option" onclick="selectTime(this, '1m')">1 λεπτό</div>
-        </div>
-
-        <button class="btn-main" onclick="requestSignal()">🔥 ΛΗΨΗ ΣΗΜΑΤΟΣ 🔥</button>
-        <div id="status"></div>
-    </div>
-
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand();
-
-        let selectedPair = "EUR/USD OTC";
-        let selectedTime = "5s";
-
-        function selectPair(element, pair) {
-            document.querySelectorAll('#pair-grid .btn-option').forEach(btn => btn.classList.remove('
+        <select id="pair-select" class="select-pair" onchange="changePair(this)">
+            <optgroup label="Forex OTC">
+                <option value="EUR/USD OTC">EUR/USD OTC</option>
+                <option value="GBP/USD OTC">GBP/USD OTC</option>
+                <option value="USD/JPY OTC">USD/JPY OTC</option>
+                <option value="AUD/CAD OTC">AUD/CAD OTC</option>
+                <option value="EUR/GBP OTC">EUR/GBP OTC</option>
+                <option value="USD/CHF OTC">USD/CHF OTC</option>
+                <option value="NZD/USD OTC">NZD/USD OTC</option>
+                <option value="AUD/USD OTC">AUD/USD OTC</option>
+                <option value="EUR/JPY OTC">EUR/JPY OTC</option>
+                <option value="GBP/JPY OTC">GBP/JPY OTC</option>
